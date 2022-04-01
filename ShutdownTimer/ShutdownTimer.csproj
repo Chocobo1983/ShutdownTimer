@@ -1,0 +1,66 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>shutdownIcon.ico</ApplicationIcon>
+    <SignAssembly>False</SignAssembly>
+    <PackageProjectUrl>https://github.com/Chocobo1983/</PackageProjectUrl>
+    <PackageIcon>Power-Shutdown.png</PackageIcon>
+    <RepositoryUrl>https://github.com/Chocobo1983/</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="gtk-media-record_green.png" />
+    <None Remove="gtk-media-record_yellow.png" />
+    <None Remove="gtk-red.png" />
+    <None Remove="Power-Shutdown.png" />
+    <None Remove="shutdownImage.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="shutdownIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Power-Shutdown.png" />
+    <Resource Include="Resources\gtk-media-record_yellow.png" />
+    <Resource Include="Resources\gtk-media-record_green.png" />
+    <Resource Include="Resources\gtk-red.png" />
+    <Resource Include="Resources\shutdownIcon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Update="Properties\Settings.Designer.cs">
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Update="Resources\Power-Shutdown.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,88 @@
+﻿<Window x:Class="ShutdownTimer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ShutdownTimer"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" 
+        Width="800" 
+        WindowStyle="None" 
+        MouseDown="Window_MouseDown" 
+        Icon="/Resources/shutdownIcon.ico" 
+        Style="{StaticResource MainWindowStyle}" 
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <local:ViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Right" Margin="0,0,10,0">
+            <Button x:Name="MinimizeButton" Style="{StaticResource MenuButtonStyle}" Click="MinimizeButton_Click">
+                <Image Source="/Resources/gtk-media-record_green.png"/>
+            </Button>
+            <Button x:Name="StateButton" Style="{StaticResource MenuButtonStyle}" Click="StateButton_Click">
+                <Image Source="/Resources/gtk-media-record_yellow.png" />
+            </Button>
+            <Button x:Name="CloseButton" Style="{StaticResource MenuButtonStyle}" Click="CloseButton_Click">
+                <Image Source="/Resources/gtk-red.png"/>
+            </Button>
+        </StackPanel>
+        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Left">
+            <Image Source="/Resources/Power-Shutdown.png" Style="{StaticResource ImageStyle}" Margin="10,0,0,0"/>
+            <TextBlock Text="مؤقت النوم" Style="{StaticResource TitleStyle}"/>
+        </StackPanel>
+        <Grid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="0.2*"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="0.5*"></RowDefinition>                
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="حتى نهاية العمل المتبقي" Style="{StaticResource InfoTextBlockStyle}"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition Width="0.2*"></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding Hours, StringFormat=00}" Style="{StaticResource NumberStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="2" Text=":" Style="{StaticResource LimiterStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="3" Text="{Binding Minutes, StringFormat=00}" Style="{StaticResource NumberStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="4" Text=":" Style="{StaticResource LimiterStyle}"/>
+                <TextBlock Grid.Row="0" Grid.Column="5" Text="{Binding Seconds, StringFormat=00}" Style="{StaticResource NumberStyle}"/>
+                <DockPanel Grid.Column="1" LastChildFill="True" Grid.Row="1">
+                    <Button Content="+" DockPanel.Dock="Left" Style="{StaticResource TimeButtonStyle}" Command="{Binding HoursIncrementCommand}"/>
+                    <Button Content="-" DockPanel.Dock="Right" Style="{StaticResource TimeButtonStyle}" Command="{Binding HoursDecrementCommand}"/>
+                    <TextBlock Text="ساعات" Style="{StaticResource TimeLabel}"/>
+                </DockPanel>
+                <DockPanel Grid.Column="3" LastChildFill="True" Grid.Row="1">
+                    <Button Content="+" DockPanel.Dock="Left" Style="{StaticResource TimeButtonStyle}" Command="{Binding MinutesIncrementCommand}"/>
+                    <Button Content="-" DockPanel.Dock="Right" Style="{StaticResource TimeButtonStyle}" Command="{Binding MinutesDecrementCommand}"/>
+                    <TextBlock Text="الدقائق" Style="{StaticResource TimeLabel}"/>
+                </DockPanel>
+                <DockPanel Grid.Column="5" LastChildFill="True" Grid.Row="1">
+                    <Button Content="+" DockPanel.Dock="Left" Style="{StaticResource TimeButtonStyle}" Command="{Binding SecondsIncrementCommand}"/>
+                    <Button Content="-" DockPanel.Dock="Right" Style="{StaticResource TimeButtonStyle}" Command="{Binding SecondsDecrementCommand}"/>
+                    <TextBlock Text="ثواني" Style="{StaticResource TimeLabel}"/>
+                </DockPanel>
+            </Grid>
+            <Button x:Name="StartStopButton" Grid.Row="2" Height="70" Width="250" Content="{Binding Title}" Style="{StaticResource StartStopButtonStyle}" Command="{Binding StartCommand}"/>
+        </Grid>
+    </Grid>
+</Window>
